@@ -1,0 +1,1286 @@
+{
+  "num_consultas": 12,
+  "num_documentos": 60,
+  "resumen": [
+    {
+      "codigo": "tfidf",
+      "nombre": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "ndcg_5": 0.7744,
+      "mrr": 0.8611,
+      "recall_5": 0.7042,
+      "ndcg_lexica": 0.8467,
+      "ndcg_semantica": 0.6185,
+      "ndcg_mixta": 0.8581,
+      "latencia_media_ms": 4.749
+    },
+    {
+      "codigo": "bm25",
+      "nombre": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "ndcg_5": 0.7607,
+      "mrr": 0.875,
+      "recall_5": 0.6764,
+      "ndcg_lexica": 0.8628,
+      "ndcg_semantica": 0.5932,
+      "ndcg_mixta": 0.8263,
+      "latencia_media_ms": 3.421
+    },
+    {
+      "codigo": "sbert",
+      "nombre": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "ndcg_5": 0.7107,
+      "mrr": 0.7917,
+      "recall_5": 0.6222,
+      "ndcg_lexica": 0.4919,
+      "ndcg_semantica": 0.7453,
+      "ndcg_mixta": 0.8949,
+      "latencia_media_ms": 41.138
+    },
+    {
+      "codigo": "lineal",
+      "nombre": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "ndcg_5": 0.7624,
+      "mrr": 0.8571,
+      "recall_5": 0.6403,
+      "ndcg_lexica": 0.7286,
+      "ndcg_semantica": 0.6824,
+      "ndcg_mixta": 0.8761,
+      "latencia_media_ms": 36.117
+    },
+    {
+      "codigo": "rrf",
+      "nombre": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "ndcg_5": 0.7661,
+      "mrr": 0.8403,
+      "recall_5": 0.6861,
+      "ndcg_lexica": 0.7055,
+      "ndcg_semantica": 0.7459,
+      "ndcg_mixta": 0.8469,
+      "latencia_media_ms": 37.778
+    },
+    {
+      "codigo": "rerank",
+      "nombre": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "ndcg_5": 0.7978,
+      "mrr": 0.8958,
+      "recall_5": 0.7653,
+      "ndcg_lexica": 0.8558,
+      "ndcg_semantica": 0.7572,
+      "ndcg_mixta": 0.7805,
+      "latencia_media_ms": 1459.898
+    }
+  ],
+  "detalle": [
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 4.7,
+      "top_5_ids": [
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 4.762,
+      "top_5_ids": [
+        "d51",
+        "d14",
+        "d01",
+        "d15",
+        "d06"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 0.9677,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 3.889,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.4189,
+      "mrr": 0.3333,
+      "recall_5": 0.75,
+      "latencia_ms": 6.216,
+      "top_5_ids": [
+        "d01",
+        "d15",
+        "d12",
+        "d51",
+        "d16"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.5788,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 3.706,
+      "top_5_ids": [
+        "d18",
+        "d19",
+        "d47",
+        "d33",
+        "d20"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.0,
+      "mrr": 0.0,
+      "recall_5": 0.0,
+      "latencia_ms": 4.516,
+      "top_5_ids": [
+        "d60",
+        "d53",
+        "d06",
+        "d30",
+        "d23"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 0.8952,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 3.707,
+      "top_5_ids": [
+        "d43",
+        "d42",
+        "d50",
+        "d45",
+        "d44"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 5.6,
+      "top_5_ids": [
+        "d03",
+        "d04",
+        "d36",
+        "d47",
+        "d52"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.9203,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 5.453,
+      "top_5_ids": [
+        "d02",
+        "d24",
+        "d06",
+        "d05",
+        "d21"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 0.9763,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 5.142,
+      "top_5_ids": [
+        "d21",
+        "d22",
+        "d26",
+        "d30",
+        "d27"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 5.074,
+      "top_5_ids": [
+        "d32",
+        "d36",
+        "d35",
+        "d33",
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "tfidf",
+      "motor": "Motor 1A: TF-IDF (Tarea 1 - Léxico)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.5449,
+      "mrr": 1.0,
+      "recall_5": 0.2,
+      "latencia_ms": 4.221,
+      "top_5_ids": [
+        "d52",
+        "d40",
+        "d12",
+        "d21",
+        "d23"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 3.214,
+      "top_5_ids": [
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 3.148,
+      "top_5_ids": [
+        "d51",
+        "d14",
+        "d01",
+        "d15",
+        "d55"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 0.9677,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 3.494,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.4834,
+      "mrr": 0.5,
+      "recall_5": 0.75,
+      "latencia_ms": 3.061,
+      "top_5_ids": [
+        "d01",
+        "d12",
+        "d15",
+        "d51",
+        "d16"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.4774,
+      "mrr": 1.0,
+      "recall_5": 0.3333,
+      "latencia_ms": 3.327,
+      "top_5_ids": [
+        "d18",
+        "d33",
+        "d32",
+        "d19",
+        "d47"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.0,
+      "mrr": 0.0,
+      "recall_5": 0.0,
+      "latencia_ms": 3.516,
+      "top_5_ids": [
+        "d60",
+        "d19",
+        "d53",
+        "d20",
+        "d06"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 0.8952,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 3.346,
+      "top_5_ids": [
+        "d43",
+        "d45",
+        "d44",
+        "d41",
+        "d50"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 3.668,
+      "top_5_ids": [
+        "d03",
+        "d04",
+        "d36",
+        "d47",
+        "d52"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.9203,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 3.497,
+      "top_5_ids": [
+        "d24",
+        "d06",
+        "d02",
+        "d05",
+        "d22"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 3.505,
+      "top_5_ids": [
+        "d21",
+        "d30",
+        "d22",
+        "d26",
+        "d27"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.849,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 3.322,
+      "top_5_ids": [
+        "d35",
+        "d32",
+        "d36",
+        "d33",
+        "d37"
+      ]
+    },
+    {
+      "codigo_motor": "bm25",
+      "motor": "Motor 1B: BM25 Okapi (Tarea 1 - Léxico)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.5449,
+      "mrr": 1.0,
+      "recall_5": 0.2,
+      "latencia_ms": 3.959,
+      "top_5_ids": [
+        "d52",
+        "d40",
+        "d21",
+        "d12",
+        "d23"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 55.189,
+      "top_5_ids": [
+        "d31",
+        "d49",
+        "d57",
+        "d09",
+        "d39"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 0.0,
+      "mrr": 0.0,
+      "recall_5": 0.0,
+      "latencia_ms": 45.863,
+      "top_5_ids": [
+        "d57",
+        "d22",
+        "d54",
+        "d56",
+        "d15"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 0.9677,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 39.377,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43",
+        "d32",
+        "d45"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.0,
+      "mrr": 0.0,
+      "recall_5": 0.0,
+      "latencia_ms": 38.468,
+      "top_5_ids": [
+        "d22",
+        "d57",
+        "d49",
+        "d21",
+        "d41"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.581,
+      "mrr": 0.5,
+      "recall_5": 0.6667,
+      "latencia_ms": 34.815,
+      "top_5_ids": [
+        "d47",
+        "d18",
+        "d19",
+        "d02",
+        "d20"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.6131,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 36.094,
+      "top_5_ids": [
+        "d03",
+        "d58",
+        "d55",
+        "d19",
+        "d56"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 40.324,
+      "top_5_ids": [
+        "d45",
+        "d42",
+        "d41",
+        "d43",
+        "d44"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 0.7872,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 42.786,
+      "top_5_ids": [
+        "d03",
+        "d13",
+        "d19",
+        "d55",
+        "d56"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.6895,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 38.349,
+      "top_5_ids": [
+        "d24",
+        "d57",
+        "d22",
+        "d06",
+        "d25"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 33.106,
+      "top_5_ids": [
+        "d27",
+        "d21",
+        "d30",
+        "d22",
+        "d26"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 35.767,
+      "top_5_ids": [
+        "d32",
+        "d35",
+        "d36",
+        "d33",
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "sbert",
+      "motor": "Motor 2: SBERT Denso (Tarea 2 - Semántico)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.8994,
+      "mrr": 1.0,
+      "recall_5": 0.8,
+      "latencia_ms": 53.515,
+      "top_5_ids": [
+        "d52",
+        "d51",
+        "d30",
+        "d56",
+        "d53"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 31.005,
+      "top_5_ids": [
+        "d31",
+        "d49",
+        "d57",
+        "d09",
+        "d39"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 0.9468,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 33.509,
+      "top_5_ids": [
+        "d51",
+        "d14",
+        "d57",
+        "d22",
+        "d15"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 0.9677,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 32.681,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43",
+        "d32",
+        "d45"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.0,
+      "mrr": 0.1429,
+      "recall_5": 0.0,
+      "latencia_ms": 36.896,
+      "top_5_ids": [
+        "d01",
+        "d22",
+        "d15",
+        "d57",
+        "d49"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.7298,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 40.263,
+      "top_5_ids": [
+        "d18",
+        "d47",
+        "d19",
+        "d02",
+        "d20"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.0,
+      "mrr": 0.1429,
+      "recall_5": 0.0,
+      "latencia_ms": 42.33,
+      "top_5_ids": [
+        "d19",
+        "d06",
+        "d60",
+        "d53",
+        "d23"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 40.15,
+      "top_5_ids": [
+        "d45",
+        "d41",
+        "d43",
+        "d42",
+        "d44"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 39.564,
+      "top_5_ids": [
+        "d03",
+        "d04",
+        "d19",
+        "d13",
+        "d36"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.7044,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 39.405,
+      "top_5_ids": [
+        "d24",
+        "d06",
+        "d22",
+        "d57",
+        "d21"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 32.274,
+      "top_5_ids": [
+        "d21",
+        "d30",
+        "d27",
+        "d22",
+        "d26"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 33.485,
+      "top_5_ids": [
+        "d32",
+        "d35",
+        "d36",
+        "d33",
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "lineal",
+      "motor": "Motor 3 (Var): Híbrido Lineal min-max (α=0.4)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.8091,
+      "mrr": 1.0,
+      "recall_5": 0.6,
+      "latencia_ms": 31.837,
+      "top_5_ids": [
+        "d52",
+        "d30",
+        "d51",
+        "d56",
+        "d55"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 27.267,
+      "top_5_ids": [
+        "d31",
+        "d49",
+        "d57",
+        "d09",
+        "d39"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 0.6078,
+      "mrr": 0.5,
+      "recall_5": 0.6667,
+      "latencia_ms": 39.08,
+      "top_5_ids": [
+        "d15",
+        "d51",
+        "d57",
+        "d14",
+        "d22"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 0.9677,
+      "mrr": 1.0,
+      "recall_5": 0.75,
+      "latencia_ms": 47.666,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43",
+        "d32",
+        "d45"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.2463,
+      "mrr": 0.3333,
+      "recall_5": 0.25,
+      "latencia_ms": 42.403,
+      "top_5_ids": [
+        "d22",
+        "d01",
+        "d12",
+        "d57",
+        "d15"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.7197,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 34.795,
+      "top_5_ids": [
+        "d18",
+        "d47",
+        "d19",
+        "d20",
+        "d02"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.2641,
+      "mrr": 0.25,
+      "recall_5": 0.5,
+      "latencia_ms": 33.794,
+      "top_5_ids": [
+        "d19",
+        "d53",
+        "d06",
+        "d03",
+        "d60"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 37.144,
+      "top_5_ids": [
+        "d45",
+        "d43",
+        "d41",
+        "d42",
+        "d44"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 37.698,
+      "top_5_ids": [
+        "d03",
+        "d04",
+        "d19",
+        "d13",
+        "d36"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.7044,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 38.062,
+      "top_5_ids": [
+        "d24",
+        "d06",
+        "d22",
+        "d57",
+        "d21"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 38.486,
+      "top_5_ids": [
+        "d21",
+        "d30",
+        "d27",
+        "d22",
+        "d26"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 38.027,
+      "top_5_ids": [
+        "d32",
+        "d35",
+        "d36",
+        "d33",
+        "d31"
+      ]
+    },
+    {
+      "codigo_motor": "rrf",
+      "motor": "Motor 3A: Híbrido RRF BM25+SBERT (Tarea 3)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.6923,
+      "mrr": 1.0,
+      "recall_5": 0.4,
+      "latencia_ms": 38.919,
+      "top_5_ids": [
+        "d52",
+        "d30",
+        "d23",
+        "d55",
+        "d40"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "UPCh",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 1425.188,
+      "top_5_ids": [
+        "d31",
+        "d49",
+        "d09",
+        "d37",
+        "d39"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "canon del sumidero",
+      "tipo": "lexica",
+      "ndcg_5": 0.9721,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 1538.322,
+      "top_5_ids": [
+        "d51",
+        "d01",
+        "d14",
+        "d57",
+        "d15"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "Aedes aegypti",
+      "tipo": "lexica",
+      "ndcg_5": 1.0,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 1550.449,
+      "top_5_ids": [
+        "d42",
+        "d41",
+        "d43",
+        "d44",
+        "d25"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "presa chicoasen grijalva",
+      "tipo": "lexica",
+      "ndcg_5": 0.451,
+      "mrr": 0.5,
+      "recall_5": 0.75,
+      "latencia_ms": 1576.982,
+      "top_5_ids": [
+        "d15",
+        "d51",
+        "d16",
+        "d12",
+        "d01"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "problemas de agua",
+      "tipo": "semantica",
+      "ndcg_5": 0.818,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 1314.89,
+      "top_5_ids": [
+        "d02",
+        "d18",
+        "d17",
+        "d20",
+        "d47"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "temblor de tierra",
+      "tipo": "semantica",
+      "ndcg_5": 0.2641,
+      "mrr": 0.25,
+      "recall_5": 0.5,
+      "latencia_ms": 1500.291,
+      "top_5_ids": [
+        "d60",
+        "d56",
+        "d53",
+        "d03",
+        "d55"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "enfermedades transmitidas por mosquitos",
+      "tipo": "semantica",
+      "ndcg_5": 0.9908,
+      "mrr": 1.0,
+      "recall_5": 0.8333,
+      "latencia_ms": 1484.687,
+      "top_5_ids": [
+        "d43",
+        "d45",
+        "d41",
+        "d44",
+        "d42"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "movimiento telurico en el mar",
+      "tipo": "semantica",
+      "ndcg_5": 0.9558,
+      "mrr": 1.0,
+      "recall_5": 1.0,
+      "latencia_ms": 1371.718,
+      "top_5_ids": [
+        "d03",
+        "d08",
+        "d04",
+        "d55",
+        "d19"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "sequia y cultivos de maiz",
+      "tipo": "mixta",
+      "ndcg_5": 0.7044,
+      "mrr": 1.0,
+      "recall_5": 0.5,
+      "latencia_ms": 1551.365,
+      "top_5_ids": [
+        "d06",
+        "d24",
+        "d29",
+        "d27",
+        "d21"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "exportacion de cafe y cacao",
+      "tipo": "mixta",
+      "ndcg_5": 0.849,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 1432.239,
+      "top_5_ids": [
+        "d21",
+        "d27",
+        "d30",
+        "d26",
+        "d29"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "inteligencia artificial y robotica",
+      "tipo": "mixta",
+      "ndcg_5": 0.8167,
+      "mrr": 1.0,
+      "recall_5": 0.6667,
+      "latencia_ms": 1346.179,
+      "top_5_ids": [
+        "d32",
+        "d35",
+        "d37",
+        "d31",
+        "d33"
+      ]
+    },
+    {
+      "codigo_motor": "rerank",
+      "motor": "Motor 3B: Híbrido RRF + Cross-Encoder (Tarea 3)",
+      "consulta": "turismo cultural en san cristobal",
+      "tipo": "mixta",
+      "ndcg_5": 0.7521,
+      "mrr": 1.0,
+      "recall_5": 0.6,
+      "latencia_ms": 1426.464,
+      "top_5_ids": [
+        "d52",
+        "d55",
+        "d51",
+        "d23",
+        "d53"
+      ]
+    }
+  ]
+}

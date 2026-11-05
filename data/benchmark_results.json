@@ -1,0 +1,448 @@
+{
+  "niveles_usuarios": [
+    1,
+    5,
+    10,
+    25,
+    50
+  ],
+  "motores": {
+    "tfidf": {
+      "nombre": "TF-IDF (T1 Léxico)",
+      "niveles": {
+        "1": {
+          "usuarios_concurrentes": 1,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 5.35,
+          "p95_ms": 8.03,
+          "p99_ms": 9.669,
+          "media_ms": 5.753,
+          "std_ms": 1.653,
+          "min_ms": 3.599,
+          "max_ms": 10.148,
+          "throughput_rps": 168.7,
+          "tiempo_lote_s": 0.142
+        },
+        "5": {
+          "usuarios_concurrentes": 5,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 24.456,
+          "p95_ms": 27.648,
+          "p99_ms": 28.13,
+          "media_ms": 22.83,
+          "std_ms": 5.316,
+          "min_ms": 8.255,
+          "max_ms": 28.27,
+          "throughput_rps": 188.01,
+          "tiempo_lote_s": 0.128
+        },
+        "10": {
+          "usuarios_concurrentes": 10,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 54.981,
+          "p95_ms": 73.367,
+          "p99_ms": 74.586,
+          "media_ms": 54.042,
+          "std_ms": 15.866,
+          "min_ms": 13.264,
+          "max_ms": 74.948,
+          "throughput_rps": 144.67,
+          "tiempo_lote_s": 0.166
+        },
+        "25": {
+          "usuarios_concurrentes": 25,
+          "total_peticiones": 50,
+          "errores": 0,
+          "p50_ms": 152.12,
+          "p95_ms": 175.234,
+          "p99_ms": 176.735,
+          "media_ms": 124.455,
+          "std_ms": 52.065,
+          "min_ms": 9.643,
+          "max_ms": 177.022,
+          "throughput_rps": 144.47,
+          "tiempo_lote_s": 0.346
+        },
+        "50": {
+          "usuarios_concurrentes": 50,
+          "total_peticiones": 100,
+          "errores": 0,
+          "p50_ms": 270.034,
+          "p95_ms": 313.808,
+          "p99_ms": 314.805,
+          "media_ms": 229.841,
+          "std_ms": 91.245,
+          "min_ms": 11.469,
+          "max_ms": 315.356,
+          "throughput_rps": 148.51,
+          "tiempo_lote_s": 0.673
+        }
+      }
+    },
+    "bm25": {
+      "nombre": "BM25 Okapi (T1 Léxico)",
+      "niveles": {
+        "1": {
+          "usuarios_concurrentes": 1,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 4.278,
+          "p95_ms": 6.721,
+          "p99_ms": 7.393,
+          "media_ms": 4.573,
+          "std_ms": 1.195,
+          "min_ms": 3.231,
+          "max_ms": 7.584,
+          "throughput_rps": 212.97,
+          "tiempo_lote_s": 0.113
+        },
+        "5": {
+          "usuarios_concurrentes": 5,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 22.191,
+          "p95_ms": 24.301,
+          "p99_ms": 24.71,
+          "media_ms": 20.274,
+          "std_ms": 4.897,
+          "min_ms": 4.891,
+          "max_ms": 24.808,
+          "throughput_rps": 216.81,
+          "tiempo_lote_s": 0.111
+        },
+        "10": {
+          "usuarios_concurrentes": 10,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 42.555,
+          "p95_ms": 45.334,
+          "p99_ms": 46.459,
+          "media_ms": 35.401,
+          "std_ms": 11.733,
+          "min_ms": 6.551,
+          "max_ms": 46.785,
+          "throughput_rps": 203.84,
+          "tiempo_lote_s": 0.118
+        },
+        "25": {
+          "usuarios_concurrentes": 25,
+          "total_peticiones": 50,
+          "errores": 0,
+          "p50_ms": 117.18,
+          "p95_ms": 140.507,
+          "p99_ms": 150.274,
+          "media_ms": 101.459,
+          "std_ms": 40.407,
+          "min_ms": 6.133,
+          "max_ms": 153.111,
+          "throughput_rps": 156.03,
+          "tiempo_lote_s": 0.32
+        },
+        "50": {
+          "usuarios_concurrentes": 50,
+          "total_peticiones": 100,
+          "errores": 0,
+          "p50_ms": 245.796,
+          "p95_ms": 301.395,
+          "p99_ms": 302.019,
+          "media_ms": 209.616,
+          "std_ms": 91.239,
+          "min_ms": 5.493,
+          "max_ms": 302.101,
+          "throughput_rps": 163.57,
+          "tiempo_lote_s": 0.611
+        }
+      }
+    },
+    "sbert": {
+      "nombre": "SBERT Denso (T2 Semántico)",
+      "niveles": {
+        "1": {
+          "usuarios_concurrentes": 1,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 48.258,
+          "p95_ms": 64.186,
+          "p99_ms": 73.783,
+          "media_ms": 49.261,
+          "std_ms": 7.763,
+          "min_ms": 38.382,
+          "max_ms": 76.143,
+          "throughput_rps": 20.24,
+          "tiempo_lote_s": 1.186
+        },
+        "5": {
+          "usuarios_concurrentes": 5,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 239.776,
+          "p95_ms": 279.665,
+          "p99_ms": 280.474,
+          "media_ms": 240.379,
+          "std_ms": 32.18,
+          "min_ms": 127.675,
+          "max_ms": 280.61,
+          "throughput_rps": 20.01,
+          "tiempo_lote_s": 1.199
+        },
+        "10": {
+          "usuarios_concurrentes": 10,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 486.911,
+          "p95_ms": 603.694,
+          "p99_ms": 608.199,
+          "media_ms": 456.835,
+          "std_ms": 104.754,
+          "min_ms": 181.252,
+          "max_ms": 608.753,
+          "throughput_rps": 19.92,
+          "tiempo_lote_s": 1.205
+        },
+        "25": {
+          "usuarios_concurrentes": 25,
+          "total_peticiones": 50,
+          "errores": 0,
+          "p50_ms": 1246.802,
+          "p95_ms": 1742.313,
+          "p99_ms": 1800.069,
+          "media_ms": 1204.999,
+          "std_ms": 329.851,
+          "min_ms": 597.575,
+          "max_ms": 1806.611,
+          "throughput_rps": 18.15,
+          "tiempo_lote_s": 2.755
+        },
+        "50": {
+          "usuarios_concurrentes": 50,
+          "total_peticiones": 100,
+          "errores": 0,
+          "p50_ms": 2358.307,
+          "p95_ms": 2625.305,
+          "p99_ms": 2686.146,
+          "media_ms": 2038.586,
+          "std_ms": 624.026,
+          "min_ms": 592.891,
+          "max_ms": 2771.081,
+          "throughput_rps": 20.04,
+          "tiempo_lote_s": 4.99
+        }
+      }
+    },
+    "rrf": {
+      "nombre": "Híbrido RRF BM25+SBERT (T3)",
+      "niveles": {
+        "1": {
+          "usuarios_concurrentes": 1,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 48.704,
+          "p95_ms": 56.826,
+          "p99_ms": 58.203,
+          "media_ms": 49.552,
+          "std_ms": 4.073,
+          "min_ms": 41.173,
+          "max_ms": 58.497,
+          "throughput_rps": 20.0,
+          "tiempo_lote_s": 1.2
+        },
+        "5": {
+          "usuarios_concurrentes": 5,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 249.307,
+          "p95_ms": 294.703,
+          "p99_ms": 300.303,
+          "media_ms": 245.508,
+          "std_ms": 31.683,
+          "min_ms": 175.161,
+          "max_ms": 301.166,
+          "throughput_rps": 19.67,
+          "tiempo_lote_s": 1.22
+        },
+        "10": {
+          "usuarios_concurrentes": 10,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 510.8,
+          "p95_ms": 651.58,
+          "p99_ms": 656.543,
+          "media_ms": 489.707,
+          "std_ms": 129.078,
+          "min_ms": 168.458,
+          "max_ms": 657.594,
+          "throughput_rps": 18.82,
+          "tiempo_lote_s": 1.275
+        },
+        "25": {
+          "usuarios_concurrentes": 25,
+          "total_peticiones": 50,
+          "errores": 0,
+          "p50_ms": 1137.217,
+          "p95_ms": 1560.635,
+          "p99_ms": 1659.809,
+          "media_ms": 1106.917,
+          "std_ms": 269.59,
+          "min_ms": 477.926,
+          "max_ms": 1686.474,
+          "throughput_rps": 19.78,
+          "tiempo_lote_s": 2.528
+        },
+        "50": {
+          "usuarios_concurrentes": 50,
+          "total_peticiones": 100,
+          "errores": 0,
+          "p50_ms": 2382.485,
+          "p95_ms": 2605.662,
+          "p99_ms": 2753.371,
+          "media_ms": 2054.593,
+          "std_ms": 614.774,
+          "min_ms": 526.194,
+          "max_ms": 2813.809,
+          "throughput_rps": 19.83,
+          "tiempo_lote_s": 5.043
+        }
+      }
+    },
+    "rerank": {
+      "nombre": "Híbrido RRF + Cross-Encoder (T3)",
+      "niveles": {
+        "1": {
+          "usuarios_concurrentes": 1,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 1742.944,
+          "p95_ms": 1918.765,
+          "p99_ms": 1922.741,
+          "media_ms": 1755.243,
+          "std_ms": 108.819,
+          "min_ms": 1518.3,
+          "max_ms": 1923.48,
+          "throughput_rps": 0.57,
+          "tiempo_lote_s": 42.13
+        },
+        "5": {
+          "usuarios_concurrentes": 5,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 8783.82,
+          "p95_ms": 12117.971,
+          "p99_ms": 12742.522,
+          "media_ms": 9187.618,
+          "std_ms": 1646.261,
+          "min_ms": 5357.57,
+          "max_ms": 12919.291,
+          "throughput_rps": 0.52,
+          "tiempo_lote_s": 45.861
+        },
+        "10": {
+          "usuarios_concurrentes": 10,
+          "total_peticiones": 24,
+          "errores": 0,
+          "p50_ms": 16670.515,
+          "p95_ms": 20402.565,
+          "p99_ms": 21133.355,
+          "media_ms": 16026.903,
+          "std_ms": 3216.887,
+          "min_ms": 8510.339,
+          "max_ms": 21308.232,
+          "throughput_rps": 0.58,
+          "tiempo_lote_s": 41.499
+        },
+        "25": {
+          "usuarios_concurrentes": 25,
+          "total_peticiones": 25,
+          "errores": 0,
+          "p50_ms": 39715.778,
+          "p95_ms": 41656.047,
+          "p99_ms": 41894.956,
+          "media_ms": 38333.671,
+          "std_ms": 3275.696,
+          "min_ms": 29711.262,
+          "max_ms": 41947.544,
+          "throughput_rps": 0.6,
+          "tiempo_lote_s": 42.007
+        },
+        "50": {
+          "usuarios_concurrentes": 50,
+          "total_peticiones": 50,
+          "errores": 0,
+          "p50_ms": 87478.688,
+          "p95_ms": 90943.868,
+          "p99_ms": 91103.356,
+          "media_ms": 80911.07,
+          "std_ms": 12435.105,
+          "min_ms": 46542.139,
+          "max_ms": 91159.449,
+          "throughput_rps": 0.55,
+          "tiempo_lote_s": 91.33
+        }
+      }
+    }
+  },
+  "tabla_50_usuarios": [
+    {
+      "codigo": "tfidf",
+      "motor": "TF-IDF (T1 Léxico)",
+      "usuarios": 50,
+      "p50_ms": 270.03,
+      "p95_ms": 313.81,
+      "p99_ms": 314.81,
+      "media_ms": 229.84,
+      "min_ms": 11.47,
+      "max_ms": 315.36,
+      "throughput_rps": 148.51
+    },
+    {
+      "codigo": "bm25",
+      "motor": "BM25 Okapi (T1 Léxico)",
+      "usuarios": 50,
+      "p50_ms": 245.8,
+      "p95_ms": 301.4,
+      "p99_ms": 302.02,
+      "media_ms": 209.62,
+      "min_ms": 5.49,
+      "max_ms": 302.1,
+      "throughput_rps": 163.57
+    },
+    {
+      "codigo": "sbert",
+      "motor": "SBERT Denso (T2 Semántico)",
+      "usuarios": 50,
+      "p50_ms": 2358.31,
+      "p95_ms": 2625.3,
+      "p99_ms": 2686.15,
+      "media_ms": 2038.59,
+      "min_ms": 592.89,
+      "max_ms": 2771.08,
+      "throughput_rps": 20.04
+    },
+    {
+      "codigo": "rrf",
+      "motor": "Híbrido RRF BM25+SBERT (T3)",
+      "usuarios": 50,
+      "p50_ms": 2382.48,
+      "p95_ms": 2605.66,
+      "p99_ms": 2753.37,
+      "media_ms": 2054.59,
+      "min_ms": 526.19,
+      "max_ms": 2813.81,
+      "throughput_rps": 19.83
+    },
+    {
+      "codigo": "rerank",
+      "motor": "Híbrido RRF + Cross-Encoder (T3)",
+      "usuarios": 50,
+      "p50_ms": 87478.69,
+      "p95_ms": 90943.87,
+      "p99_ms": 91103.36,
+      "media_ms": 80911.07,
+      "min_ms": 46542.14,
+      "max_ms": 91159.45,
+      "throughput_rps": 0.55
+    }
+  ]
+}

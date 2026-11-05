@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="h-full bg-slate-50/50" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Buscador de Documentos · Minería de Datos</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] },
+      colors: { brand: { 50:'#f0f5ff', 100:'#e0ecff', 500:'#3b66ff', 600:'#254ce6', 700:'#1a3ac7', 900:'#0e1f6e' } },
+      boxShadow: {
+        soft: '0 4px 20px -2px rgba(15,23,42,.05), 0 2px 6px -1px rgba(15,23,42,.02)',
+        float: '0 12px 32px -4px rgba(15,23,42,.08), 0 4px 12px -2px rgba(15,23,42,.03)',
+        pill: '0 2px 10px rgba(0,0,0,.03)'
+      }
+    } }
+  }
+</script>
+<style>
+  ::selection { background-color:#dbeafe; color:#1e3a8a; }
+  .mesh-gradient-bg { background-color:#f8fafc;
+    background-image: radial-gradient(at 10% 12%, rgba(219,234,254,.6) 0, transparent 50%),
+                      radial-gradient(at 90% 10%, rgba(233,213,255,.5) 0, transparent 50%),
+                      radial-gradient(at 50% 85%, rgba(220,252,231,.4) 0, transparent 60%); }
+  .glass-card { background: rgba(255,255,255,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  .tab-btn { color:#475569; font-weight:500; }
+  .tab-btn:hover { background: rgba(255,255,255,.6); color:#0f172a; }
+  .tab-btn.activo { background:#fff; color:#0f172a; font-weight:600; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+  .panel { display:none; } .panel.activo { display:block; }
+  .u-btn.activo { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
+  .spin { animation: spin 1s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body class="min-h-full flex flex-col font-sans text-slate-800 antialiased mesh-gradient-bg selection:bg-brand-100">
+
+<!-- ENCABEZADO -->
+<header class="pt-8 pb-6 px-4 sm:px-6 lg:px-8 border-b border-slate-200/60 bg-white/40 backdrop-blur-md sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.06] text-xs font-medium text-slate-600 mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+      <span>Minería de Datos · Tarea 4 Corte 2</span>
+      <span class="text-slate-300">|</span>
+      <span class="text-slate-700 font-semibold">Clemente Velasco Alhan</span>
+      <span class="text-slate-400">· 233319</span>
+    </div>
+    <div class="flex items-center justify-center gap-3 mb-2.5">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 flex items-center justify-center shadow-md shadow-blue-500/20 text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">Buscador de Documentos</h1>
+    </div>
+    <p class="max-w-2xl text-sm sm:text-base text-slate-600 leading-relaxed">
+      Comparación de <span class="font-semibold text-slate-800">3 motores de búsqueda</span> sobre un corpus de 60 artículos obtenidos mediante <span class="font-medium text-slate-700">web scraping</span>.
+    </p>
+    <nav class="mt-6 flex flex-wrap items-center justify-center p-1.5 rounded-2xl bg-slate-200/60 border border-slate-300/60 shadow-inner max-w-fit mx-auto gap-1">
+      <button class="tab-btn activo inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm transition-all" data-tab="buscar">
+        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linecap="round" stroke-linejoin="round"/></svg>Buscar</button>
+      <button class="tab-btn inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm transition-all" data-tab="rendimiento">
+        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"/></svg>Rendimiento</button>
+      <button class="tab-btn inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm transition-all" data-tab="calidad">
+        <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"/></svg>Calidad</button>
+      <button class="tab-btn inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm transition-all" data-tab="corpus">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Corpus</button>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+
+<!-- ================= BUSCAR ================= -->
+<div id="buscar" class="panel activo space-y-9">
+  <section class="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 shadow-soft">
+    <div class="mb-5">
+      <h2 class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Busca en el corpus</h2>
+      <p class="text-sm text-slate-500 mt-1">Escribe una consulta y mira cómo responde cada motor de búsqueda.</p>
+    </div>
+    <form class="space-y-4" id="search-form">
+      <div class="relative flex items-center shadow-sm rounded-2xl group focus-within:ring-2 focus-within:ring-blue-600/30 transition-all border border-slate-200/90 bg-white">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <input autocomplete="off" class="block w-full py-4 pl-12 pr-32 text-base text-slate-900 placeholder-slate-400 bg-transparent rounded-2xl border-0 focus:ring-0 focus:outline-none" id="query-input" placeholder="Ejemplo: contaminación del agua en ríos" type="search"/>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2">
+          <button id="btn-buscar" class="inline-flex items-center gap-2 px-6 py-2.5 bg-slate-900 hover:bg-blue-600 text-white font-medium text-sm rounded-xl shadow transition-all active:scale-95 disabled:opacity-60" type="submit"><span id="btn-buscar-txt">Buscar</span></button>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-600">
+        <span class="font-medium text-slate-400 mr-1">Prueba con:</span>
+        <button class="chip-btn px-3 py-1.5 rounded-lg bg-white/80 hover:bg-blue-50 hover:text-blue-700 border border-slate-200/80 transition-colors" type="button">sequía en cultivos</button>
+        <button class="chip-btn px-3 py-1.5 rounded-lg bg-white/80 hover:bg-blue-50 hover:text-blue-700 border border-slate-200/80 transition-colors" type="button">inteligencia artificial</button>
+        <button class="chip-btn px-3 py-1.5 rounded-lg bg-white/80 hover:bg-blue-50 hover:text-blue-700 border border-slate-200/80 transition-colors" type="button">presas hidroeléctricas</button>
+        <button class="chip-btn px-3 py-1.5 rounded-lg bg-white/80 hover:bg-blue-50 hover:text-blue-700 border border-slate-200/80 transition-colors" type="button">enfermedades por agua contaminada</button>
+        <button class="chip-btn px-3 py-1.5 rounded-lg bg-white/80 hover:bg-blue-50 hover:text-blue-700 border border-slate-200/80 transition-colors" type="button">turismo en Chiapas</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6" id="motores"></section>
+</div>
+
+<!-- ================= RENDIMIENTO ================= -->
+<div id="rendimiento" class="panel space-y-6">
+  <section class="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 shadow-soft">
+    <h2 class="text-xl font-bold text-slate-900 sm:text-2xl">Rendimiento con usuarios concurrentes</h2>
+    <p class="text-sm text-slate-500 mt-1 mb-5"><b>p50</b>: la mitad de las peticiones tardó menos que ese tiempo. <b>p95</b>: el 95% tardó menos que ese tiempo.</p>
+    <div class="flex flex-wrap items-center gap-2 mb-5">
+      <span class="text-sm font-medium text-slate-600 mr-1">Usuarios simultáneos:</span>
+      <button class="u-btn px-4 py-1.5 rounded-full border-2 border-slate-200 bg-white text-sm font-semibold" data-u="1">1</button>
+      <button class="u-btn px-4 py-1.5 rounded-full border-2 border-slate-200 bg-white text-sm font-semibold" data-u="5">5</button>
+      <button class="u-btn px-4 py-1.5 rounded-full border-2 border-slate-200 bg-white text-sm font-semibold" data-u="10">10</button>
+      <button class="u-btn px-4 py-1.5 rounded-full border-2 border-slate-200 bg-white text-sm font-semibold" data-u="25">25</button>
+      <button class="u-btn activo px-4 py-1.5 rounded-full border-2 border-slate-200 bg-white text-sm font-semibold" data-u="50">50</button>
+    </div>
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-slate-600"><tr><th class="text-left p-3">Motor</th><th class="text-right p-3">p50 (ms)</th><th class="text-right p-3">p95 (ms)</th><th class="text-right p-3">Peticiones/seg</th></tr></thead>
+        <tbody id="tablaLat"></tbody>
+      </table>
+    </div>
+    <div id="graficaLat" class="mt-6"></div>
+  </section>
+
+  <section class="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 shadow-soft">
+    <h3 class="text-lg font-bold text-slate-900">Probar la simulación en vivo</h3>
+    <p class="text-sm text-slate-500 mt-1 mb-4">Lanza peticiones simultáneas al servidor ahora mismo. Se omite el Cross-Encoder porque tarda demasiado.</p>
+    <div class="flex items-center gap-3">
+      <select id="usuariosVivo" class="rounded-xl border-slate-200 text-sm">
+        <option value="10">10 usuarios</option><option value="25">25 usuarios</option><option value="50" selected>50 usuarios</option>
+      </select>
+      <button id="btnVivo" class="px-5 py-2.5 bg-slate-900 hover:bg-blue-600 text-white text-sm font-medium rounded-xl transition-all disabled:opacity-60">▶ Simular</button>
+    </div>
+    <div id="resVivo" class="mt-4"></div>
+  </section>
+</div>
+
+<!-- ================= CALIDAD ================= -->
+<div id="calidad" class="panel space-y-6">
+  <section class="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 shadow-soft">
+    <h2 class="text-xl font-bold text-slate-900 sm:text-2xl">¿Qué tan buenos son los resultados?</h2>
+    <p class="text-sm text-slate-500 mt-1 mb-5">Se probaron 12 consultas con respuestas correctas conocidas. Mientras más cerca de 1.0, mejor.</p>
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-slate-600"><tr><th class="text-left p-3">Motor</th><th class="text-right p-3">nDCG@5</th><th class="text-right p-3">MRR</th><th class="text-right p-3">Recall@5</th></tr></thead>
+        <tbody id="tablaCal"></tbody>
+      </table>
+    </div>
+    <div class="mt-4 text-sm text-amber-900 bg-amber-50 border-l-4 border-amber-400 rounded-lg p-3">
+      <b>nDCG@5:</b> qué tan bien ordenados quedan los 5 primeros. <b>MRR:</b> en qué posición sale el primer resultado correcto. <b>Recall@5:</b> qué porcentaje de los documentos correctos aparece en el top 5.
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-slate-900 mb-1">¿Cuál escoger?</h2>
+    <p class="text-sm text-slate-500 mb-4">Ventajas y desventajas que encontré de cada motor.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="bg-white rounded-3xl border border-blue-100 shadow-soft p-6">
+        <h3 class="font-bold text-blue-800 text-lg mb-3">Léxico (TF-IDF / BM25)</h3>
+        <ul class="text-sm space-y-1.5 text-slate-700">
+          <li class="text-emerald-700">✔ Muy rápido (≈5 ms)</li><li class="text-emerald-700">✔ Fácil de entender y explicar</li>
+          <li class="text-emerald-700">✔ Excelente con palabras exactas</li><li class="text-rose-600">✘ No entiende sinónimos ni significado</li>
+        </ul>
+        <p class="mt-4 text-xs bg-blue-50 text-blue-900 rounded-lg p-3">Úsalo cuando importe la velocidad o se busquen términos exactos.</p>
+      </article>
+      <article class="bg-white rounded-3xl border border-emerald-100 shadow-soft p-6">
+        <h3 class="font-bold text-emerald-800 text-lg mb-3">Semántico (SBERT)</h3>
+        <ul class="text-sm space-y-1.5 text-slate-700">
+          <li class="text-emerald-700">✔ Entiende significado y sinónimos</li><li class="text-emerald-700">✔ Sirve con lenguaje natural</li>
+          <li class="text-rose-600">✘ Más lento (≈50 ms)</li><li class="text-rose-600">✘ Falla con términos muy específicos</li>
+        </ul>
+        <p class="mt-4 text-xs bg-emerald-50 text-emerald-900 rounded-lg p-3">Úsalo cuando los usuarios escriben con sus propias palabras.</p>
+      </article>
+      <article class="bg-white rounded-3xl border border-purple-100 shadow-soft p-6">
+        <h3 class="font-bold text-purple-800 text-lg mb-3">Híbrido + Reranking</h3>
+        <ul class="text-sm space-y-1.5 text-slate-700">
+          <li class="text-emerald-700">✔ La mejor calidad de los tres</li><li class="text-emerald-700">✔ Combina palabras exactas y significado</li>
+          <li class="text-rose-600">✘ Muy lento (≈1.7 s por consulta)</li><li class="text-rose-600">✘ Con 50 usuarios se satura</li>
+        </ul>
+        <p class="mt-4 text-xs bg-purple-50 text-purple-900 rounded-lg p-3">Úsalo cuando la precisión importe más que el tiempo de respuesta.</p>
+      </article>
+    </div>
+    <div class="mt-6 bg-white rounded-3xl border border-slate-200 shadow-soft p-6">
+      <h3 class="font-bold text-slate-900">Conclusión</h3>
+      <p class="text-sm text-slate-700 mt-2">Para un sistema con muchos usuarios, <b>BM25</b> es lo más práctico. Si se quiere entender mejor el lenguaje, conviene <b>SBERT</b> o el <b>híbrido RRF</b>. El <b>Cross-Encoder</b> da la mejor calidad, pero solo debe aplicarse a los 10 mejores candidatos y con pocos usuarios.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CORPUS ================= -->
+<div id="corpus" class="panel">
+  <section class="glass-card rounded-3xl p-6 sm:p-8 border border-white/70 shadow-soft">
+    <h2 class="text-xl font-bold text-slate-900 sm:text-2xl">Corpus obtenido con web scraping</h2>
+    <p id="statsCorpus" class="text-sm text-slate-500 mt-1 mb-4">Cargando…</p>
+    <input id="filtroCorpus" class="w-full rounded-xl border-slate-200 text-sm mb-4" placeholder="Filtrar por título o categoría…">
+    <div id="listaCorpus" class="divide-y divide-slate-100 bg-white rounded-2xl border border-slate-200 px-4"></div>
+  </section>
+</div>
+
+</main>
+
+<footer class="mt-auto py-6 px-4 border-t border-slate-200/70 bg-white/50 text-center">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+    <span class="text-slate-700">Universidad Politécnica de Chiapas</span><span class="hidden sm:inline text-slate-300">·</span>
+    <span>Minería de Datos</span><span class="hidden sm:inline text-slate-300">·</span>
+    <span>Fuente de los documentos: <span class="text-slate-600 font-normal">Wikipedia en español</span></span>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => Number(n).toLocaleString('es-MX', { maximumFractionDigits: 2 });
+  const NOMBRES = { tfidf:'TF-IDF (Léxico)', bm25:'BM25 (Léxico)', sbert:'SBERT (Semántico)', rrf:'Híbrido RRF', rerank:'Híbrido + Cross-Encoder' };
+  const COLORES = { tfidf:'#60a5fa', bm25:'#2563eb', sbert:'#10b981', rrf:'#a78bfa', rerank:'#7c3aed' };
+
+  /* Los 3 motores de la pestaña Buscar */
+  const MOTORES = [
+    { n:1, api:'bm25',   color:'blue',    etiqueta:'BM25',               titulo:'Léxico',    desc:'Coincidencia por palabras exactas y frecuencia' },
+    { n:2, api:'sbert',  color:'emerald', etiqueta:'SBERT',              titulo:'Semántico', desc:'Embeddings densos y similitud de significado' },
+    { n:3, api:'rerank', color:'purple',  etiqueta:'RRF + Cross-Encoder', titulo:'Híbrido',   desc:'Fusión recíproca con reranking profundo' }
+  ];
+  $('motores').innerHTML = MOTORES.map(m => `
+    <article class="bg-white rounded-3xl border border-slate-200/80 shadow-soft overflow-hidden flex flex-col transition-all hover:shadow-float">
+      <header class="p-5 border-b border-${m.color}-100 bg-gradient-to-b from-${m.color}-50/70 to-white">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-${m.color}-100/80 text-${m.color}-800 text-xs font-semibold uppercase tracking-wider">
+            <span class="w-1.5 h-1.5 rounded-full bg-${m.color}-600"></span>Motor ${m.n}</span>
+          <span class="text-xs font-medium text-slate-400">${m.etiqueta}</span>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900">${m.titulo}</h3>
+        <p class="text-xs text-slate-500 mt-0.5">${m.desc}</p>
+      </header>
+      <div class="px-5 py-2.5 bg-slate-50/70 border-b border-slate-100 flex items-center justify-between text-xs font-medium">
+        <span class="text-slate-500">Tiempo de respuesta</span>
+        <span id="t${m.n}" class="font-mono text-slate-400">—</span>
+      </div>
+      <div id="r${m.n}" class="flex-1">
+        <div class="p-8 text-center text-sm text-slate-500">Aquí aparecerán los resultados</div>
+      </div>
+    </article>`).join('');
+
+  /* Pestañas */
+  document.querySelectorAll('.tab-btn').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('activo'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('activo'));
+    b.classList.add('activo'); $(b.dataset.tab).classList.add('activo');
+  });
+
+  /* Buscar */
+  function pintar(m, data) {
+    $('t' + m.n).textContent = fmt(data.latencia_ms) + ' ms';
+    $('t' + m.n).className = 'font-mono font-semibold text-' + m.color + '-700';
+    if (!data.resultados.length) { $('r' + m.n).innerHTML = '<div class="p-8 text-center text-sm text-slate-500">Sin resultados.</div>'; return; }
+    $('r' + m.n).innerHTML = data.resultados.map(r => `
+      <div class="px-5 py-4 border-b border-slate-100 last:border-0">
+        <h4 class="text-sm font-semibold text-slate-900 flex gap-2">
+          <span class="shrink-0 w-5 h-5 rounded-full bg-${m.color}-100 text-${m.color}-800 text-xs flex items-center justify-center">${r.rank}</span>${r.titulo}</h4>
+        <span class="text-[11px] uppercase tracking-wide text-slate-400">${r.categoria}</span>
+        <p class="text-xs text-slate-600 mt-1 leading-relaxed">${r.snippet}</p>
+        <a href="${r.fuente_url}" target="_blank" class="text-xs text-blue-600 hover:underline">Ver fuente ↗</a>
+      </div>`).join('');
+  }
+  async function pedir(engine, q) {
+    const r = await fetch('/api/search', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ query:q, engine:engine, top_k:5 }) });
+    if (!r.ok) throw new Error('error');
+    return (await r.json()).motores[engine];
+  }
+  async function buscar() {
+    const q = $('query-input').value.trim();
+    if (!q) { $('query-input').focus(); return; }
+    $('btn-buscar').disabled = true; $('btn-buscar-txt').textContent = 'Buscando…';
+    MOTORES.forEach(m => { $('r' + m.n).innerHTML = '<div class="p-8 text-center text-sm text-slate-500">Buscando…</div>'; $('t' + m.n).textContent = '…'; });
+    await Promise.all(MOTORES.map(async m => {
+      try { pintar(m, await pedir(m.api, q)); }
+      catch (e) { $('r' + m.n).innerHTML = '<div class="p-8 text-center text-sm text-rose-600">No se pudo buscar.</div>'; }
+    }));
+    $('btn-buscar').disabled = false; $('btn-buscar-txt').textContent = 'Buscar';
+  }
+  $('search-form').addEventListener('submit', e => { e.preventDefault(); buscar(); });
+  document.querySelectorAll('.chip-btn').forEach(c => c.onclick = () => { $('query-input').value = c.textContent.trim(); buscar(); });
+
+  /* Rendimiento */
+  let bench = null, usuarios = '50';
+  const filaTabla = (m, d, mejor) => `<tr class="border-t border-slate-100"><td class="p-3">${NOMBRES[m]}</td>
+    <td class="p-3 text-right">${fmt(d.p50_ms)}</td>
+    <td class="p-3 text-right ${mejor ? 'bg-emerald-100 font-bold' : ''}">${fmt(d.p95_ms)}</td>
+    <td class="p-3 text-right">${fmt(d.throughput_rps)}</td></tr>`;
+  function pintarLat() {
+    if (!bench) return;
+    const filas = ['bm25','tfidf','sbert','rrf','rerank'].filter(m => bench.motores[m] && bench.motores[m].niveles[usuarios])
+      .map(m => ({ m, d: bench.motores[m].niveles[usuarios] }));
+    const min = Math.min(...filas.map(f => f.d.p95_ms)), max = Math.max(...filas.map(f => f.d.p95_ms));
+    $('tablaLat').innerHTML = filas.map(f => filaTabla(f.m, f.d, f.d.p95_ms === min)).join('');
+    $('graficaLat').innerHTML = '<p class="text-sm font-semibold text-slate-700 mb-2">Latencia p95 (más corta = mejor)</p>' + filas.map(f => `
+      <div class="mb-3"><div class="flex justify-between text-xs text-slate-600 mb-1"><span>${NOMBRES[f.m]}</span><span>${fmt(f.d.p95_ms)} ms</span></div>
+      <div class="h-3 bg-slate-200 rounded-full overflow-hidden"><div class="h-full rounded-full" style="width:${Math.max(2, f.d.p95_ms / max * 100)}%;background:${COLORES[f.m]}"></div></div></div>`).join('');
+  }
+  document.querySelectorAll('.u-btn').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.u-btn').forEach(x => x.classList.remove('activo'));
+    b.classList.add('activo'); usuarios = b.dataset.u; pintarLat();
+  });
+  fetch('/api/benchmark').then(r => r.json()).then(d => { bench = d; pintarLat(); })
+    .catch(() => { $('tablaLat').innerHTML = '<tr><td colspan="4" class="p-3">No hay resultados guardados.</td></tr>'; });
+
+  $('btnVivo').onclick = async () => {
+    const btn = $('btnVivo'); btn.disabled = true; btn.textContent = 'Simulando…';
+    $('resVivo').innerHTML = '<p class="text-sm text-slate-500">Enviando peticiones simultáneas, espera unos segundos…</p>';
+    try {
+      const r = await fetch('/api/benchmark/run', { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ concurrent_users: Number($('usuariosVivo').value), queries_per_user: 2, engines: ['tfidf','bm25','sbert','rrf'] }) });
+      const d = await r.json();
+      $('resVivo').innerHTML = `<div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white"><table class="w-full text-sm">
+        <thead class="bg-slate-50 text-slate-600"><tr><th class="text-left p-3">Motor</th><th class="text-right p-3">p50 (ms)</th><th class="text-right p-3">p95 (ms)</th><th class="text-right p-3">Peticiones/seg</th></tr></thead><tbody>` +
+        Object.entries(d.resultados).map(([m, x]) => filaTabla(m, x, false)).join('') + '</tbody></table></div>';
+    } catch (e) { $('resVivo').innerHTML = '<p class="text-sm text-rose-600">No se pudo ejecutar la simulación.</p>'; }
+    btn.disabled = false; btn.textContent = '▶ Simular';
+  };
+
+  /* Calidad */
+  fetch('/api/evaluate').then(r => r.json()).then(d => {
+    const filas = d.resumen.filter(x => NOMBRES[x.codigo]);
+    const mx = k => Math.max(...filas.map(f => f[k]));
+    const celda = (f, k) => `<td class="p-3 text-right ${f[k] === mx(k) ? 'bg-emerald-100 font-bold' : ''}">${f[k].toFixed(3)}</td>`;
+    $('tablaCal').innerHTML = filas.map(f => `<tr class="border-t border-slate-100"><td class="p-3">${NOMBRES[f.codigo]}</td>${celda(f,'ndcg_5')}${celda(f,'mrr')}${celda(f,'recall_5')}</tr>`).join('');
+  }).catch(() => { $('tablaCal').innerHTML = '<tr><td colspan="4" class="p-3">No se pudo cargar.</td></tr>'; });
+
+  /* Corpus */
+  let docs = [];
+  function pintarCorpus() {
+    const f = $('filtroCorpus').value.toLowerCase();
+    $('listaCorpus').innerHTML = docs.filter(d => (d.titulo + d.categoria).toLowerCase().includes(f)).map(d => `
+      <div class="py-3 text-sm"><b class="text-slate-900">${d.titulo}</b>
+        <span class="text-slate-400"> · ${d.categoria} · ${d.num_palabras} palabras</span><br>
+        <a href="${d.fuente_url}" target="_blank" class="text-xs text-blue-600 hover:underline break-all">${d.fuente_url}</a></div>`).join('');
+  }
+  fetch('/api/corpus').then(r => r.json()).then(d => {
+    docs = d.documentos; const s = d.estadisticas;
+    $('statsCorpus').textContent = `${s.total_documentos} documentos · mínimo ${s.min_palabras} palabras · promedio ${s.promedio_palabras} · ${s.total_palabras.toLocaleString('es-MX')} palabras en total`;
+    pintarCorpus();
+  }).catch(() => { $('statsCorpus').textContent = 'No se pudo cargar el corpus.'; });
+  $('filtroCorpus').oninput = pintarCorpus;
+</script>
+</body></html>

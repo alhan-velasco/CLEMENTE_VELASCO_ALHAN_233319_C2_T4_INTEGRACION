@@ -1,0 +1,61 @@
+id,titulo,categoria,num_palabras,num_caracteres,fuente_url,fecha_extraccion
+d01,Inundaciones y lluvias torrenciales en Tuxtla Gutiérrez,Medio Ambiente y Clima,228,1471,https://es.wikipedia.org/wiki/Tuxtla_Guti%C3%A9rrez,2026-11-04 22:51:29
+d02,Sequía meteorológica y crisis hídrica en México,Medio Ambiente y Clima,225,1378,https://es.wikipedia.org/wiki/Sequ%C3%ADa,2026-11-04 22:51:29
+d03,Sismología y actividad tectónica en la costa de Chiapas,Medio Ambiente y Clima,223,1311,https://es.wikipedia.org/wiki/Sismo_de_Chiapas_de_2017,2026-11-04 22:51:29
+d04,Servicio Sismológico Nacional y monitoreo sísmico,Medio Ambiente y Clima,226,1447,https://es.wikipedia.org/wiki/Servicio_Sismol%C3%B3gico_Nacional_(M%C3%A9xico),2026-11-04 22:51:29
+d05,Cambio climático y vulnerabilidad ambiental en México,Medio Ambiente y Clima,216,1447,https://es.wikipedia.org/wiki/Cambio_clim%C3%A1tico_en_M%C3%A9xico,2026-11-04 22:51:29
+d06,Reserva de la biosfera Selva El Ocote en Chiapas,Medio Ambiente y Clima,225,1366,https://es.wikipedia.org/wiki/Reserva_de_la_biosfera_Selva_El_Ocote,2026-11-04 22:51:29
+d07,Reserva de la biosfera Montes Azules y Selva Lacandona,Medio Ambiente y Clima,211,1216,https://es.wikipedia.org/wiki/Reserva_de_la_biosfera_Montes_Azules,2026-11-04 22:51:29
+d08,Huracanes y ciclones tropicales en el Pacífico sur mexicano,Medio Ambiente y Clima,200,1269,https://es.wikipedia.org/wiki/Cicl%C3%B3n_tropical,2026-11-04 22:51:29
+d09,Incendios forestales y conservación de bosques en Chiapas,Medio Ambiente y Clima,192,1177,https://es.wikipedia.org/wiki/Incendio_forestal,2026-11-04 22:51:29
+d10,Protección Civil y gestión de riesgos ante desastres naturales,Medio Ambiente y Clima,203,1318,https://es.wikipedia.org/wiki/Protecci%C3%B3n_civil,2026-11-04 22:51:29
+d11,Crisis hídrica y escasez de agua potable en zonas urbanas,Recursos Hídricos,229,1445,https://es.wikipedia.org/wiki/Escasez_de_agua_en_M%C3%A9xico,2026-11-04 22:51:29
+d12,Cuenca hidrológica del río Grijalva en Chiapas,Recursos Hídricos,217,1257,https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva,2026-11-04 22:51:29
+d13,Río Usumacinta y biodiversidad acuática fronteriza,Recursos Hídricos,152,869,https://es.wikipedia.org/wiki/R%C3%ADo_Usumacinta,2026-11-04 22:51:29
+d14,Central hidroeléctrica Chicoasén y generación de energía,Recursos Hídricos,207,1273,https://es.wikipedia.org/wiki/Presa_Chicoas%C3%A9n,2026-11-04 22:51:29
+d15,Presa Belisario Domínguez La Angostura y regulación hídrica,Recursos Hídricos,192,1180,https://es.wikipedia.org/wiki/Presa_La_Angostura,2026-11-04 22:51:29
+d16,Presa Malpaso Nezahualcóyotl y control de inundaciones,Recursos Hídricos,225,1389,https://es.wikipedia.org/wiki/Presa_Malpaso,2026-11-04 22:51:29
+d17,Tratamiento de aguas residuales y saneamiento ambiental,Recursos Hídricos,219,1391,https://es.wikipedia.org/wiki/Tratamiento_de_aguas_residuales,2026-11-04 22:51:29
+d18,Agua potable y redes de distribución municipal,Recursos Hídricos,223,1307,https://es.wikipedia.org/wiki/Agua_potable,2026-11-04 22:51:29
+d19,Acuíferos subterráneos y mantenimiento de pozos de agua,Recursos Hídricos,187,1127,https://es.wikipedia.org/wiki/Agua_subterr%C3%A1nea,2026-11-04 22:51:29
+d20,Comisión Nacional del Agua y gestión de cuencas en México,Recursos Hídricos,212,1426,https://es.wikipedia.org/wiki/Comisi%C3%B3n_Nacional_del_Agua,2026-11-04 22:51:29
+d21,Producción y exportación de café de altura en Chiapas,Agroindustria y Economía,228,1415,https://es.wikipedia.org/wiki/Caf%C3%A9_de_Chiapas,2026-11-04 22:51:29
+d22,Cultivo de cacao en la región del Soconusco,Agroindustria y Economía,226,1385,https://es.wikipedia.org/wiki/Cacao_de_Grijalva,2026-11-04 22:51:29
+d23,Región económica del Soconusco y comercio agropecuario,Agroindustria y Economía,223,1412,https://es.wikipedia.org/wiki/Soconusco,2026-11-04 22:51:29
+d24,Cultivo de maíz y seguridad alimentaria en el sur de México,Agroindustria y Economía,230,1378,https://es.wikipedia.org/wiki/Ma%C3%ADz,2026-11-04 22:51:29
+d25,Producción de frijol y agricultura temporalera en México,Agroindustria y Economía,225,1417,https://es.wikipedia.org/wiki/Phaseolus_vulgaris,2026-11-04 22:51:29
+d26,Chocolate artesanal y cooperativas productoras de cacao,Agroindustria y Economía,222,1312,https://es.wikipedia.org/wiki/Chocolate,2026-11-04 22:51:29
+d27,Caficultura orgánica y comercio justo en la Sierra Madre,Agroindustria y Economía,229,1375,https://es.wikipedia.org/wiki/Caficultura,2026-11-04 22:51:29
+d28,Plátano y fruticultura tropical en la costa de Chiapas,Agroindustria y Economía,228,1502,https://es.wikipedia.org/wiki/Musa_%C3%97_paradisiaca,2026-11-04 22:51:29
+d29,Apicultura y exportación de miel orgánica chiapaneca,Agroindustria y Economía,230,1386,https://es.wikipedia.org/wiki/Apicultura,2026-11-04 22:51:29
+d30,Feria Chiapas y promoción comercial de productores regionales,Agroindustria y Economía,224,1439,https://es.wikipedia.org/wiki/Econom%C3%ADa_de_M%C3%A9xico,2026-11-04 22:51:29
+d31,Universidad Politécnica de Chiapas e ingeniería tecnológica,"Ciencia, IA y Robótica",196,1398,https://es.wikipedia.org/wiki/Universidad_Polit%C3%A9cnica_de_Chiapas,2026-11-04 22:51:29
+d32,Inteligencia artificial y modelos de aprendizaje profundo,"Ciencia, IA y Robótica",188,1287,https://es.wikipedia.org/wiki/Inteligencia_artificial,2026-11-04 22:51:29
+d33,Aprendizaje automático y minería de datos computacional,"Ciencia, IA y Robótica",225,1515,https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico,2026-11-04 22:51:29
+d34,Visión por computadora y procesamiento de imágenes con GPUs,"Ciencia, IA y Robótica",223,1450,https://es.wikipedia.org/wiki/Visi%C3%B3n_artificial,2026-11-04 22:51:29
+d35,Robótica educativa y competencias nacionales de mecatrónica,"Ciencia, IA y Robótica",185,1214,https://es.wikipedia.org/wiki/Rob%C3%B3tica,2026-11-04 22:51:29
+d36,Brazo robótico articulado y automatización de bajo costo,"Ciencia, IA y Robótica",161,995,https://es.wikipedia.org/wiki/Brazo_rob%C3%B3tico,2026-11-04 22:51:29
+d37,Procesamiento de lenguaje natural y recuperación de información,"Ciencia, IA y Robótica",211,1323,https://es.wikipedia.org/wiki/Procesamiento_de_lenguajes_naturales,2026-11-04 22:51:29
+d38,Unidad de procesamiento gráfico GPU para entrenamiento neuronal,"Ciencia, IA y Robótica",224,1527,https://es.wikipedia.org/wiki/Unidad_de_procesamiento_gr%C3%A1fico,2026-11-04 22:51:29
+d39,Búsqueda semántica y vectores de incrustación de palabras,"Ciencia, IA y Robótica",214,1452,https://es.wikipedia.org/wiki/Word_embedding,2026-11-04 22:51:29
+d40,Universidad Autónoma de Chiapas e investigación científica,"Ciencia, IA y Robótica",222,1483,https://es.wikipedia.org/wiki/Universidad_Aut%C3%B3noma_de_Chiapas,2026-11-04 22:51:29
+d41,Dengue y control epidemiológico del mosquito Aedes aegypti,Salud Pública,228,1526,https://es.wikipedia.org/wiki/Dengue,2026-11-04 22:51:29
+d42,Aedes aegypti y eliminación de criaderos de mosquitos en zonas cálidas,Salud Pública,212,1290,https://es.wikipedia.org/wiki/Aedes_aegypti,2026-11-04 22:51:29
+d43,Fiebre chikungunya y enfermedades transmitidas por vectores,Salud Pública,224,1399,https://es.wikipedia.org/wiki/Fiebre_chikungu%C3%B1a,2026-11-04 22:51:29
+d44,Virus del Zika y vigilancia epidemiológica en el sureste,Salud Pública,222,1300,https://es.wikipedia.org/wiki/Virus_del_Zika,2026-11-04 22:51:29
+d45,Paludismo o malaria en regiones tropicales de México,Salud Pública,218,1356,https://es.wikipedia.org/wiki/Malaria,2026-11-04 22:51:29
+d46,Secretaría de Salud y campañas de prevención sanitaria,Salud Pública,230,1497,https://es.wikipedia.org/wiki/Secretar%C3%ADa_de_Salud_(M%C3%A9xico),2026-11-04 22:51:29
+d47,Enfermedades gastrointestinales por contaminación hídrica,Salud Pública,222,1267,https://es.wikipedia.org/wiki/Calidad_del_agua,2026-11-04 22:51:29
+d48,Vacunación y atención médica primaria en comunidades rurales,Salud Pública,218,1388,https://es.wikipedia.org/wiki/Vacuna,2026-11-04 22:51:29
+d49,Golpe de calor y deshidratación por altas temperaturas,Salud Pública,200,1238,https://es.wikipedia.org/wiki/Golpe_de_calor,2026-11-04 22:51:29
+d50,Vigilancia epidemiológica y control de vectores sanitarios,Salud Pública,199,1421,https://es.wikipedia.org/wiki/Vector_epidemiol%C3%B3gico,2026-11-04 22:51:29
+d51,Parque Nacional Cañón del Sumidero y ecoturismo fluvial,"Turismo, Cultura e Infraestructura",216,1261,https://es.wikipedia.org/wiki/Ca%C3%B1%C3%B3n_del_Sumidero,2026-11-04 22:51:29
+d52,San Cristóbal de las Casas como destino cultural y arquitectónico,"Turismo, Cultura e Infraestructura",217,1329,https://es.wikipedia.org/wiki/San_Crist%C3%B3bal_de_las_Casas,2026-11-04 22:51:29
+d53,Zona arqueológica de Palenque y patrimonio maya en Chiapas,"Turismo, Cultura e Infraestructura",211,1188,https://es.wikipedia.org/wiki/Palenque_(zona_arqueol%C3%B3gica),2026-11-04 22:51:29
+d54,"Chiapa de Corzo, fiesta grande de los Parachicos y tradición","Turismo, Cultura e Infraestructura",216,1281,https://es.wikipedia.org/wiki/Chiapa_de_Corzo,2026-11-04 22:51:29
+d55,Cascadas de Agua Azul y turismo de naturaleza en Chiapas,"Turismo, Cultura e Infraestructura",228,1309,https://es.wikipedia.org/wiki/Cascadas_de_Agua_Azul,2026-11-04 22:51:29
+d56,Lagunas de Montebello y conservación de ecosistemas lacustres,"Turismo, Cultura e Infraestructura",224,1414,https://es.wikipedia.org/wiki/Parque_nacional_Lagunas_de_Montebello,2026-11-04 22:51:29
+d57,Textiles artesanales mayas y gastronomía tradicional de los Altos,"Turismo, Cultura e Infraestructura",227,1353,https://es.wikipedia.org/wiki/Gastronom%C3%ADa_de_Chiapas,2026-11-04 22:51:29
+d58,Infraestructura carretera Tuxtla Gutiérrez a la costa de Chiapas,"Turismo, Cultura e Infraestructura",205,1222,https://es.wikipedia.org/wiki/Carretera_Federal_190,2026-11-04 22:51:29
+d59,Aeropuerto Internacional Ángel Albino Corzo y conectividad aérea,"Turismo, Cultura e Infraestructura",215,1352,https://es.wikipedia.org/wiki/Aeropuerto_Internacional_%C3%81ngel_Albino_Corzo,2026-11-04 22:51:29
+d60,Tapachula y comercio fronterizo en la costa de Chiapas,"Turismo, Cultura e Infraestructura",216,1339,https://es.wikipedia.org/wiki/Tapachula,2026-11-04 22:51:29
