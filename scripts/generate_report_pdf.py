@@ -1,6 +1,6 @@
 """
 Generador del Reporte Técnico en PDF (Tarea 4 · Corte 2: Integración de Motores de Búsqueda)
-Alumno: Alhan Clemente Velasco · Matrícula: 233319
+Alumno: Clemente Velasco Alhan · Matrícula: 233319
 Nomenclatura: CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION.pdf
 """
 
@@ -51,7 +51,7 @@ def header_footer(canvas, doc):
     canvas.drawString(
         0.75 * inch,
         0.45 * inch,
-        "Alhan Clemente Velasco · 233319 · Corte 2 Tarea 4: Integración de Motores de Búsqueda",
+        "Clemente Velasco Alhan · 233319 · Corte 2 Tarea 4: Integración de Motores de Búsqueda",
     )
     canvas.drawRightString(
         letter[0] - 0.75 * inch,

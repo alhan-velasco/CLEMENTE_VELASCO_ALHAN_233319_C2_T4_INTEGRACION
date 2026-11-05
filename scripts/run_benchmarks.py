@@ -1,7 +1,7 @@
 """
 Script de Evaluación IR, Simulación de Carga de hasta 50 Usuarios Concurrentes (p50 y p95)
 y Generación de Gráficas de Desempeño (Tarea 4 · Corte 2)
-Alumno: Alhan Clemente Velasco · Matrícula: 233319
+Alumno: Clemente Velasco Alhan · Matrícula: 233319
 Materia: Minería de Datos · UPCh · Docente: Ramsés Alejandro Camas Nájera
 """
 

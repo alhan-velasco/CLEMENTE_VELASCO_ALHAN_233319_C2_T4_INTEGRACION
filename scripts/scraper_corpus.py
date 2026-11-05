@@ -1,6 +1,6 @@
 """
 Script de Web Scraping para construcción del Corpus (Tarea 4 · Corte 2)
-Alumno: Alhan Clemente Velasco · Matrícula: 233319
+Alumno: Clemente Velasco Alhan · Matrícula: 233319
 Materia: Minería de Datos · UPCh · Docente: Ramsés Alejandro Camas Nájera
 
 Extrae 60 documentos reales en español mediante Web Scraping (HTML de Wikipedia ES),

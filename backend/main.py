@@ -1,6 +1,6 @@
 """
 Backend Fullstack con FastAPI para Integración de Motores de Búsqueda (Tarea 4 · Corte 2)
-Alumno: Alhan Clemente Velasco · Matrícula: 233319
+Alumno: Clemente Velasco Alhan · Matrícula: 233319
 Materia: Minería de Datos · UPCh · Docente: Ramsés Alejandro Camas Nájera
 """
 
