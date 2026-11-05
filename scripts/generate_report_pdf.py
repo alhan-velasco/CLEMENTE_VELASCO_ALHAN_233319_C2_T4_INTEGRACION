@@ -2,263 +2,128 @@
 Generador del Reporte Técnico en PDF (Tarea 4 · Corte 2: Integración de Motores de Búsqueda)
 Alumno: Clemente Velasco Alhan · Matrícula: 233319
 Nomenclatura: CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION.pdf
+
+Formato clásico: Arial 12, interlineado 1.5, texto justificado, títulos 16, subtítulos 14,
+tablas con cuadrícula negra, sin colores, sin pie de página (solo número de página).
 """
 
 import json
+import re
 from pathlib import Path
+
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT, TA_RIGHT
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
-from reportlab.platypus import (
-    HRFlowable,
-    Image,
-    KeepTogether,
-    PageBreak,
-    Paragraph,
-    SimpleDocTemplate,
-    Spacer,
-    Table,
-    TableStyle,
-)
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import Image as _Image
+from reportlab.platypus import PageBreak
+from reportlab.platypus import Paragraph as _Paragraph
+from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 WORKSPACE_DIR = BASE_DIR.parent
 DATA_DIR = BASE_DIR / "data"
 REPORTS_DIR = BASE_DIR / "reports"
 
-NAVY = colors.HexColor("#1C3257")
-TEAL = colors.HexColor("#1F6E6C")
-CORAL = colors.HexColor("#C85A32")
-DARK_TEXT = colors.HexColor("#1E293B")
-MUTED_TEXT = colors.HexColor("#64748B")
-LIGHT_BG = colors.HexColor("#F8FAFC")
-CALLOUT_BG = colors.HexColor("#FFFBEB")
-CALLOUT_BORDER = colors.HexColor("#D97706")
-BORDER_GRAY = colors.HexColor("#CBD5E1")
+FONTS_DIR = Path(r"C:\Windows\Fonts")
+pdfmetrics.registerFont(TTFont("Arial", str(FONTS_DIR / "arial.ttf")))
+pdfmetrics.registerFont(TTFont("Arial-Bold", str(FONTS_DIR / "arialbd.ttf")))
+pdfmetrics.registerFont(TTFont("Arial-Italic", str(FONTS_DIR / "ariali.ttf")))
+pdfmetrics.registerFont(TTFont("Arial-BoldItalic", str(FONTS_DIR / "arialbi.ttf")))
+pdfmetrics.registerFontFamily(
+    "Arial", normal="Arial", bold="Arial-Bold", italic="Arial-Italic", boldItalic="Arial-BoldItalic"
+)
+
+MAX_W = 6.3 * inch
+BLACK = colors.black
+
+
+class Paragraph(_Paragraph):
+    """Párrafo plano: elimina negritas, cursivas y código en el texto, y viñetas decorativas."""
+
+    def __init__(self, text, style=None, *args, **kwargs):
+        text = re.sub(r"</?(b|i|code)>", "", text)
+        text = re.sub(r"^(<para[^>]*>)?\u2022\s*", lambda m: m.group(1) or "", text)
+        text = text.replace("\u2022 ", "- ")
+        text = text.replace("\n", "<br/>")
+        super().__init__(text, style, *args, **kwargs)
+
+
+class Image(_Image):
+    """Imagen escalada para que quepa en el ancho útil de la página."""
+
+    def __init__(self, filename, width=None, height=None, **kwargs):
+        if width and width > MAX_W:
+            height = height * MAX_W / width
+            width = MAX_W
+        super().__init__(filename, width=width, height=height, **kwargs)
 
 
 def header_footer(canvas, doc):
+    """Solo número de página, centrado, sin portada."""
     if doc.page == 1:
         return
     canvas.saveState()
-    canvas.setStrokeColor(BORDER_GRAY)
-    canvas.setLineWidth(0.6)
-    canvas.line(0.75 * inch, 0.65 * inch, letter[0] - 0.75 * inch, 0.65 * inch)
-    canvas.setFont("Helvetica", 8.5)
-    canvas.setFillColor(MUTED_TEXT)
-    canvas.drawString(
-        0.75 * inch,
-        0.45 * inch,
-        "Clemente Velasco Alhan · 233319 · Corte 2 Tarea 4: Integración de Motores de Búsqueda",
-    )
-    canvas.drawRightString(
-        letter[0] - 0.75 * inch,
-        0.45 * inch,
-        f"UPCh · Minería de Datos · Pág. {doc.page}",
-    )
+    canvas.setFont("Arial", 10)
+    canvas.setFillColor(BLACK)
+    canvas.drawCentredString(letter[0] / 2, 0.55 * inch, str(doc.page))
     canvas.restoreState()
 
 
 def build_styles():
     styles = getSampleStyleSheet()
-    custom = {
-        "CoverUniv": ParagraphStyle(
-            "CoverUniv",
-            parent=styles["Normal"],
-            fontName="Helvetica-Bold",
-            fontSize=21,
-            leading=26,
-            alignment=TA_RIGHT,
-            textColor=TEAL,
-        ),
-        "CoverCareer": ParagraphStyle(
-            "CoverCareer",
-            parent=styles["Normal"],
-            fontName="Helvetica-Bold",
-            fontSize=15,
-            leading=20,
-            alignment=TA_RIGHT,
-            textColor=DARK_TEXT,
-        ),
-        "CoverTitle": ParagraphStyle(
-            "CoverTitle",
-            parent=styles["Normal"],
-            fontName="Helvetica-Bold",
-            fontSize=14,
-            leading=19,
-            alignment=TA_RIGHT,
-            textColor=NAVY,
-        ),
-        "CoverMeta": ParagraphStyle(
-            "CoverMeta",
-            parent=styles["Normal"],
-            fontName="Helvetica-Bold",
-            fontSize=11,
-            leading=16,
-            alignment=TA_LEFT,
-            textColor=DARK_TEXT,
-        ),
-        "H1": ParagraphStyle(
-            "H1",
-            parent=styles["Heading1"],
-            fontName="Helvetica-Bold",
-            fontSize=14.5,
-            leading=19,
-            textColor=NAVY,
-            spaceBefore=10,
-            spaceAfter=6,
-        ),
-        "H2": ParagraphStyle(
-            "H2",
-            parent=styles["Heading2"],
-            fontName="Helvetica-Bold",
-            fontSize=11.5,
-            leading=15,
-            textColor=TEAL,
-            spaceBefore=10,
-            spaceAfter=5,
-        ),
-        "H3": ParagraphStyle(
-            "H3",
-            parent=styles["Heading3"],
-            fontName="Helvetica-Bold",
-            fontSize=10.2,
-            leading=14,
-            textColor=CORAL,
-            spaceBefore=8,
-            spaceAfter=4,
-        ),
-        "Body": ParagraphStyle(
-            "Body",
-            parent=styles["Normal"],
-            fontName="Helvetica",
-            fontSize=9.6,
-            leading=14.2,
-            alignment=TA_JUSTIFY,
-            textColor=DARK_TEXT,
-            spaceAfter=6,
-        ),
-        "BulletItem": ParagraphStyle(
-            "BulletItem",
-            parent=styles["Normal"],
-            fontName="Helvetica",
-            fontSize=9.4,
-            leading=13.8,
-            leftIndent=14,
-            firstLineIndent=-8,
-            alignment=TA_JUSTIFY,
-            textColor=DARK_TEXT,
-            spaceAfter=4,
-        ),
-        "Caption": ParagraphStyle(
-            "Caption",
-            parent=styles["Normal"],
-            fontName="Helvetica-Oblique",
-            fontSize=8.5,
-            leading=11.5,
-            alignment=TA_CENTER,
-            textColor=MUTED_TEXT,
-            spaceBefore=3,
-            spaceAfter=8,
-        ),
-        "TableHeader": ParagraphStyle(
-            "TableHeader",
-            parent=styles["Normal"],
-            fontName="Helvetica-Bold",
-            fontSize=8.3,
-            leading=11,
-            textColor=colors.white,
-            alignment=TA_LEFT,
-        ),
-        "TableCell": ParagraphStyle(
-            "TableCell",
-            parent=styles["Normal"],
-            fontName="Helvetica",
-            fontSize=8.1,
-            leading=10.8,
-            textColor=DARK_TEXT,
-            alignment=TA_LEFT,
-        ),
-        "TableCellTiny": ParagraphStyle(
-            "TableCellTiny",
-            parent=styles["Normal"],
-            fontName="Helvetica",
-            fontSize=7.2,
-            leading=9.4,
-            textColor=DARK_TEXT,
-            alignment=TA_LEFT,
-        ),
-        "Callout": ParagraphStyle(
-            "Callout",
-            parent=styles["Normal"],
-            fontName="Helvetica",
-            fontSize=9.2,
-            leading=13.2,
-            textColor=DARK_TEXT,
-        ),
-        "CodeBlock": ParagraphStyle(
-            "CodeBlock",
-            parent=styles["Code"],
-            fontName="Courier",
-            fontSize=7.8,
-            leading=10.5,
-            textColor=DARK_TEXT,
-            leftIndent=6,
-            rightIndent=6,
-        ),
+    base = dict(parent=styles["Normal"], fontName="Arial", textColor=BLACK)
+    return {
+        "CoverUniv": ParagraphStyle("CoverUniv", fontSize=16, leading=24, alignment=TA_CENTER, fontName="Arial-Bold", parent=styles["Normal"], textColor=BLACK),
+        "CoverCareer": ParagraphStyle("CoverCareer", fontSize=14, leading=21, alignment=TA_CENTER, fontName="Arial-Bold", parent=styles["Normal"], textColor=BLACK),
+        "CoverTitle": ParagraphStyle("CoverTitle", fontSize=14, leading=21, alignment=TA_CENTER, fontName="Arial-Bold", parent=styles["Normal"], textColor=BLACK),
+        "CoverMeta": ParagraphStyle("CoverMeta", fontSize=12, leading=18, alignment=TA_CENTER, **base),
+        "H1": ParagraphStyle("H1", fontName="Arial-Bold", fontSize=16, leading=24, spaceBefore=12, spaceAfter=8, keepWithNext=1, parent=styles["Normal"], textColor=BLACK),
+        "H2": ParagraphStyle("H2", fontName="Arial-Bold", fontSize=14, leading=21, spaceBefore=10, spaceAfter=6, keepWithNext=1, parent=styles["Normal"], textColor=BLACK),
+        "H3": ParagraphStyle("H3", fontName="Arial-Bold", fontSize=12, leading=18, spaceBefore=8, spaceAfter=4, keepWithNext=1, parent=styles["Normal"], textColor=BLACK),
+        "Body": ParagraphStyle("Body", fontSize=12, leading=18, alignment=TA_JUSTIFY, spaceAfter=6, **base),
+        "BulletItem": ParagraphStyle("BulletItem", fontSize=12, leading=18, alignment=TA_JUSTIFY, spaceAfter=6, **base),
+        "Caption": ParagraphStyle("Caption", fontSize=10, leading=14, alignment=TA_CENTER, spaceBefore=3, spaceAfter=10, **base),
+        "TableHeader": ParagraphStyle("TableHeader", fontName="Arial-Bold", fontSize=10, leading=12, alignment=TA_LEFT, parent=styles["Normal"], textColor=BLACK),
+        "TableCell": ParagraphStyle("TableCell", fontSize=10, leading=12, alignment=TA_LEFT, **base),
+        "TableCellTiny": ParagraphStyle("TableCellTiny", fontSize=8, leading=10, alignment=TA_LEFT, **base),
+        "Callout": ParagraphStyle("Callout", fontSize=12, leading=18, alignment=TA_JUSTIFY, spaceAfter=6, **base),
     }
-    return custom
 
 
 def make_callout(text_html: str, st):
-    p = Paragraph(text_html, st["Callout"])
-    tbl = Table([[p]], colWidths=[6.9 * inch])
+    """En el formato clásico no hay recuadros: se imprime como párrafo normal."""
+    return Paragraph(text_html, st["Body"])
+
+
+def make_styled_table(headers, rows, col_widths, st, cell_style_key="TableCell"):
+    total = sum(col_widths)
+    col_widths = [w * MAX_W / total for w in col_widths]
+    data = [[Paragraph(h, st["TableHeader"]) for h in headers]]
+    for r in rows:
+        data.append([Paragraph(str(c), st[cell_style_key]) for c in r])
+
+    tbl = Table(data, colWidths=col_widths, repeatRows=1)
     tbl.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, -1), CALLOUT_BG),
-                ("BOX", (0, 0), (-1, -1), 0.5, BORDER_GRAY),
-                ("LINEBEFORE", (0, 0), (0, -1), 3.5, CALLOUT_BORDER),
-                ("TOPPADDING", (0, 0), (-1, -1), 8),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
-                ("LEFTPADDING", (0, 0), (-1, -1), 11),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 11),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("GRID", (0, 0), (-1, -1), 0.75, BLACK),
+                ("TOPPADDING", (0, 0), (-1, -1), 4),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+                ("LEFTPADDING", (0, 0), (-1, -1), 5),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 5),
             ]
         )
     )
     return tbl
 
 
-def make_styled_table(headers, rows, col_widths, st, cell_style_key="TableCell"):
-    data = [[Paragraph(f"<b>{h}</b>", st["TableHeader"]) for h in headers]]
-    for r in rows:
-        data.append([Paragraph(str(c), st[cell_style_key]) for c in r])
-
-    tbl = Table(data, colWidths=col_widths, repeatRows=1)
-    style_cmds = [
-        ("BACKGROUND", (0, 0), (-1, 0), NAVY),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("GRID", (0, 0), (-1, -1), 0.4, BORDER_GRAY),
-        ("TOPPADDING", (0, 0), (-1, -1), 5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-        ("LEFTPADDING", (0, 0), (-1, -1), 6),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-    ]
-    for i in range(1, len(data)):
-        if i % 2 == 0:
-            style_cmds.append(("BACKGROUND", (0, i), (-1, i), LIGHT_BG))
-    tbl.setStyle(TableStyle(style_cmds))
-    return tbl
-
-
 def section_heading(title: str, st):
-    return [
-        Paragraph(title, st["H1"]),
-        HRFlowable(width="100%", thickness=1.5, color=CORAL, spaceBefore=1, spaceAfter=8),
-    ]
+    return [Paragraph(title, st["H1"])]
 
 
 def generar_pdf():
@@ -273,6 +138,13 @@ def generar_pdf():
     avg_pal = sum(palabras_list) / len(palabras_list)
     tot_pal = sum(palabras_list)
 
+    vocab_txt = "Vocabulario único: no disponible"
+    proc_path = DATA_DIR / "corpus_procesado.json"
+    if proc_path.exists():
+        proc = json.loads(proc_path.read_text(encoding="utf-8"))
+        vocab = {t for d in proc for t in d.get("tokens", [])}
+        vocab_txt = f"Vocabulario único: {len(vocab):,} lemas tras el preprocesamiento"
+
     pdf_paths = [
         BASE_DIR / "CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION.pdf",
         WORKSPACE_DIR / "CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION.pdf",
@@ -282,10 +154,10 @@ def generar_pdf():
         doc = SimpleDocTemplate(
             str(out_path),
             pagesize=letter,
-            leftMargin=0.75 * inch,
-            rightMargin=0.75 * inch,
-            topMargin=0.7 * inch,
-            bottomMargin=0.75 * inch,
+            leftMargin=1 * inch,
+            rightMargin=1 * inch,
+            topMargin=1 * inch,
+            bottomMargin=1 * inch,
             title="CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION",
             author="Clemente Velasco Alhan (233319)",
         )
@@ -310,7 +182,7 @@ def generar_pdf():
         story.append(Spacer(1, 0.55 * inch))
         story.append(
             Paragraph(
-                "<para align='right'><b>Docente:</b> RAMSES ALEJANDRO CAMAS NAJERA</para>",
+                "<para align='center'><b>Docente:</b> RAMSES ALEJANDRO CAMAS NAJERA</para>",
                 st["Body"],
             )
         )
@@ -341,10 +213,10 @@ def generar_pdf():
             Paragraph(
                 "En este reporte documento el diseño, construcción y evaluación experimental del sistema "
                 "<b>Fullstack de Recuperación de Información</b> correspondiente a la <b>Tarea 4 del Corte 2</b>. "
-                "Siguiendo las instrucciones al pie de la letra, integré los motores obtenidos en las tareas "
+                "Conforme a las instrucciones de la tarea, integré los motores obtenidos en las tareas "
                 "anteriores dentro de una arquitectura Backend (<b>FastAPI</b>) y Frontend (<b>Web App Interactiva</b>), "
                 "creé un nuevo corpus de <b>60 documentos en español (todos con más de 100 palabras)</b> mediante "
-                "<b>Web Scraping automatizado</b> (adjuntando las 60 fuentes verificables en la Sección 7), evalué la "
+                "<b>Web Scraping automatizado</b> (adjuntando las 60 fuentes verificables en la Sección 6), evalué la "
                 "calidad de recuperación con métricas estándar (<b>nDCG@5</b>, <b>MRR</b> y <b>Recall@5</b>) y simulé "
                 "cargas de <b>1, 5, 10, 25 y hasta 50 usuarios concurrentes</b> reportando las latencias <b>p50</b> y <b>p95</b>.",
                 st["Body"],
@@ -369,8 +241,8 @@ def generar_pdf():
             ["Total de documentos extraídos", f"{len(corpus)} documentos", ">= 50 documentos (Cumplido: +20% extra)"],
             ["Mínimo de palabras por documento", f"{min_pal} palabras", ">= 100 palabras en el 100% del corpus"],
             ["Máximo de palabras por documento", f"{max_pal} palabras", "Textos densos de varios párrafos"],
-            ["Promedio de palabras por documento", f"{avg_pal:.1f} palabras/doc", "7.5x más extenso que el corpus del Lab 1"],
-            ["Total de palabras en el corpus", f"{tot_pal:,} palabras", "Vocabulario único: 2,340+ lemas sin stopwords"],
+            ["Promedio de palabras por documento", f"{avg_pal:.1f} palabras/doc", "Aproximadamente 7.6 veces más extenso que el corpus del Lab 1"],
+            ["Total de palabras en el corpus", f"{tot_pal:,} palabras", vocab_txt],
             ["Categorías temáticas cubiertas", "6 categorías (10 docs c/u)", "Medio Ambiente, Agua, Agro, IA/Robótica, Salud, Turismo"],
         ]
         story.append(
@@ -434,7 +306,7 @@ def generar_pdf():
         story.append(
             Paragraph(
                 "• <b>Frontend Web Interactivo (<code>frontend/index.html</code>):</b> Single-Page Application (SPA) servida "
-                "en la raíz <code>GET /</code> con diseño institucional UPCh y gráficos dinámicos en <b>Chart.js</b>. "
+                "en la raíz <code>GET /</code> con diseño en Tailwind CSS y barras de latencia dinámicas. "
                 "Cuenta con cuatro pestañas: (1) <i>Buscador Comparativo Multi-Motor</i> que muestra lado a lado los resultados, "
                 "scores, tiempos de respuesta en milisegundos, lemas coincidentes y enlaces a las fuentes; (2) <i>Simulador de "
                 "Concurrencia de hasta 50 Usuarios</i> con tablas y gráficas de latencia <b>p50</b> y <b>p95</b>; (3) <i>Tablero de "
@@ -474,7 +346,6 @@ def generar_pdf():
                 st,
             )
         )
-        story.append(PageBreak())
 
         # ================= SECCIÓN 3: COMPORTAMIENTO Y CALIDAD IR =================
         story.extend(
@@ -580,7 +451,6 @@ def generar_pdf():
                 st["BulletItem"],
             )
         )
-        story.append(PageBreak())
 
         # ================= SECCIÓN 4: LATENCIA P50 Y P95 (50 USUARIOS CONCURRENTES) =================
         story.extend(
@@ -669,7 +539,7 @@ def generar_pdf():
                     "50 Usuarios",
                 ],
                 rows_levels,
-                [1.9 * inch, 1.0 * inch, 1.0 * inch, 1.0 * inch, 1.0 * inch, 1.0 * inch],
+                [1.5 * inch, 1.05 * inch, 1.05 * inch, 1.1 * inch, 1.1 * inch, 1.1 * inch],
                 st,
             )
         )
@@ -700,7 +570,15 @@ def generar_pdf():
                 st,
             )
         )
-        story.append(PageBreak())
+        story.append(
+            Paragraph(
+                "Limitación de la simulación: los usuarios concurrentes se simularon con hilos dentro de un solo "
+                "proceso de Python en CPU, sin GPU ni servidores de carga externos. Por ello las latencias con 50 "
+                "usuarios, sobre todo las de SBERT y el Cross-Encoder, reflejan el encolamiento de la inferencia en "
+                "un solo equipo y no el comportamiento de un despliegue en producción.",
+                st["Body"],
+            )
+        )
 
         # ================= SECCIÓN 5: VENTAJAS, DESVENTAJAS, CUÁNDO USAR CADA CORPUS Y CRITERIO DE DECISIÓN =================
         story.extend(
@@ -719,13 +597,13 @@ def generar_pdf():
             ],
             [
                 "Motor 1B: BM25 Okapi\n(Tarea 1 - Lab 3)",
-                "• El motor más veloz y con mayor throughput (213 req/s; p50=4.28 ms en 1 usuario y p95=301.4 ms en 50 usuarios).\n• Saturación controlada (k1=1.5) y ajuste por longitud (b=0.75).\n• Imbatible en siglas (UPCh) y nombres técnicos.",
+                "• El motor más veloz y con mayor throughput (163.6 req/s con 50 usuarios; p50=4.28 ms en 1 usuario y p95=301.4 ms en 50 usuarios).\n• Saturación controlada (k1=1.5) y ajuste por longitud (b=0.75).\n• Imbatible en siglas (UPCh) y nombres técnicos.",
                 "• Barrera léxica estricta: obtiene nDCG@5 = 0.000 en consultas puramente semánticas como 'temblor de tierra'.\n• Depende fuertemente de la calidad del lematizador (spaCy).",
             ],
             [
                 "Motor 2: SBERT Denso\n(Tarea 2 - Labs 5/6)",
                 "• Excelente en consultas semánticas (0.745) y líder en mixtas (0.895).\n• Resuelve sinónimos (agua/hídrica, temblor/sismo) y paráfrasis.\n• Los embeddings de los documentos se precalculan una sola vez offline.",
-                "• Pierde precisión en siglas y entidades locales dentro de textos largos (nDCG@5 Léxico cae a 0.492).\n• 10x más lento que BM25 en CPU (p95 = 2,625 ms con 50 usuarios).\n• Mayor huella de RAM (~470 MB del modelo).",
+                "• Pierde precisión en siglas y entidades locales dentro de textos largos (nDCG@5 Léxico cae a 0.492).\n• Aproximadamente 9 veces más lento que BM25 en CPU (p95 = 2,625 ms con 50 usuarios).\n• Mayor huella de RAM (~470 MB del modelo).",
             ],
             [
                 "Motor 3A: Híbrido RRF\n(BM25 + SBERT, k=60)\n(Tarea 3 - Lab 7)",
@@ -752,7 +630,7 @@ def generar_pdf():
         story.append(
             Paragraph(
                 "Al contrastar el <b>corpus corto de los laboratorios previos (14 notas de ~28 palabras)</b> contra el "
-                "<b>nuevo corpus extenso creado por Web Scraping (60 documentos de 144 a 230 palabras)</b>, identifiqué "
+                "<b>nuevo corpus extenso creado por Web Scraping (60 documentos de 152 a 230 palabras)</b>, identifiqué "
                 "criterios claros sobre cuándo utilizar cada tipo de corpus y qué arquitectura aplicar:",
                 st["Body"],
             )
@@ -823,7 +701,6 @@ def generar_pdf():
                 st,
             )
         )
-        story.append(PageBreak())
 
         # ================= SECCIÓN 6: ANEXO DE LAS 60 FUENTES DEL WEB SCRAPING =================
         story.extend(
@@ -836,7 +713,7 @@ def generar_pdf():
             Paragraph(
                 "A continuación se adjunta el catálogo auditable de los <b>60 documentos extraídos mediante Web Scraping</b> "
                 "(almacenados en <code>data/corpus_scraped.json</code> y <code>data/fuentes_scraping.csv</code>), incluyendo su "
-                "identificador, título, categoría temática, conteo exacto de palabras (todos <b>&ge; 144 palabras</b>, cumpliendo "
+                "identificador, título, categoría temática, conteo exacto de palabras (todos <b>&ge; 152 palabras</b>, cumpliendo "
                 "holgadamente el mínimo de 100 palabras) y la URL fuente consultada:",
                 st["Body"],
             )
@@ -858,12 +735,11 @@ def generar_pdf():
             make_styled_table(
                 ["ID", "Título del Documento", "Categoría", "Palabras", "URL Fuente (Web Scraping)"],
                 rows_sources,
-                [0.42 * inch, 2.05 * inch, 1.35 * inch, 0.68 * inch, 2.4 * inch],
+                [0.45 * inch, 1.95 * inch, 1.3 * inch, 0.85 * inch, 2.35 * inch],
                 st,
                 cell_style_key="TableCellTiny",
             )
         )
-        story.append(PageBreak())
 
         # ================= SECCIÓN 7: REPOSITORIO GITHUB Y AI_USAGE =================
         story.extend(
@@ -877,8 +753,8 @@ def generar_pdf():
                 "<para align='left'>• <b>Nomenclatura oficial del proyecto y entregables:</b> "
                 "<code>CLEMENTE_VELASCO_ALHAN_233319_C2_T4_INTEGRACION</code>.<br/>"
                 "• <b>Comando para iniciar el sistema Fullstack localmente:</b> "
-                "<code>uvicorn backend.main:app --host 0.0.0.0 --port 8000</code> (Interfaz web en "
-                "<code>http://localhost:8000</code> y documentación OpenAPI en <code>http://localhost:8000/docs</code>).</para>",
+                "<code>python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000</code> (Interfaz web en "
+                "<code>http://127.0.0.1:8000</code> y documentación OpenAPI en <code>http://127.0.0.1:8000/docs</code>).</para>",
                 st["Body"],
             )
         )
@@ -888,15 +764,15 @@ def generar_pdf():
                 "Tarea 4 Corte 2\n(Integración Fullstack,\nScraping y Benchmark)",
                 "Gemini\n(Antigravity)",
                 "scraper_corpus.py,\nbackend/engines.py,\nbackend/main.py,\nfrontend/index.html,\nrun_benchmarks.py",
-                "Estructura del extractor HTML para los 60 artículos, API REST con FastAPI, interfaz comparativa en HTML/Chart.js y arnés ThreadPoolExecutor para 50 usuarios concurrentes.",
-                "Seleccioné las 60 fuentes temáticas de Chiapas y ciencia, validé que los 60 documentos tuvieran >= 144 palabras, integré mis motores TF-IDF, BM25, SBERT y RRF+Cross-Encoder de las tareas previas y redacté el criterio de decisión con las latencias p50 y p95.",
+                "Estructura del extractor HTML para los 60 artículos, API REST con FastAPI, interfaz comparativa en HTML y Tailwind CSS y arnés ThreadPoolExecutor para 50 usuarios concurrentes.",
+                "Seleccioné las 60 fuentes temáticas de Chiapas y ciencia, validé que los 60 documentos tuvieran >= 152 palabras, integré mis motores TF-IDF, BM25, SBERT y RRF+Cross-Encoder de las tareas previas y redacté el criterio de decisión con las latencias p50 y p95.",
             ]
         ]
         story.append(
             make_styled_table(
                 ["Entrega", "Herramienta", "Módulos", "Lo que propuso la IA", "Lo que implementé y verifiqué personalmente"],
                 rows_ai,
-                [1.15 * inch, 0.85 * inch, 1.15 * inch, 1.85 * inch, 1.9 * inch],
+                [1.0 * inch, 1.05 * inch, 1.2 * inch, 1.75 * inch, 1.9 * inch],
                 st,
             )
         )
